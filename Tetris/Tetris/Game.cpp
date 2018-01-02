@@ -6,6 +6,7 @@ Game::Game()
 	text = new Score("./Font/courbd.ttf");
 	board = new Board("./Images/blocks.png");
 	controller = new Controller("./Images/blocks.png");
+	sound = new gameSound("./Audio/theme.ogg","./Audio/pause.wav");
 	backgroundTexture.loadFromFile("./Images/Frame.png");
 	background.setTexture(backgroundTexture);
 	background.setPosition(280, 0);
@@ -17,10 +18,21 @@ Game::Game()
 
 void Game::start()
 {
+	/* Sounds to be added in
+
+		block collision with another block(below block collision)
+		sound on rotation
+		pausing the game sound
+		gameover Sound
+		default clearing lines sound
+		clearing 4 lines sound (needs to be similar to default but more impressive)
+
+		bgm louder or quieter than sound effects?
+	*/
+	//loud need to add option to turn music down in menu (possible feature in future)
+	sound->playTheme();
 	while (window->isOpen())
-	{
-		
-		//add game over here
+	{	
 		while (window->pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
@@ -29,6 +41,7 @@ void Game::start()
 			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
 			{
 				isPaused = !isPaused;
+				sound->playPauseSound();
 			}
 			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) && !isPaused)
 			{
@@ -70,7 +83,7 @@ void Game::start()
 				
 				if(isPaused)
 				{
-					text->paused(*window);
+					text->paused(*window);		
 				}
 				
 				//Display gameOver Text to the screen
@@ -78,6 +91,7 @@ void Game::start()
 				if (controller->isGameOver())
 				{
 					text->overText(*window);
+					sound->endTheme();
 					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 					{
 						reset();
@@ -92,6 +106,7 @@ void Game::reset()
 	text->reset();
 	board->reset();
 	controller->reset();
+	sound->playTheme();
 	timer = 0;
 	delay = 0.8F;
 }
