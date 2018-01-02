@@ -1,4 +1,5 @@
 #include "Game.h"
+#include <iostream>
 Game::Game()
 {
 	isPaused = false;
@@ -19,36 +20,40 @@ void Game::start()
 	while (window->isOpen())
 	{
 		
+		//add game over here
 		while (window->pollEvent(event))
 		{
 			if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
 				window->close();
-
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+			//pauses game
+			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
+			{
+				isPaused = !isPaused;
+			}
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) && !isPaused)
 			{
 				controller->movement(sf::Keyboard::Key::Right, board);
 			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) && !isPaused)
 			{
 				controller->movement(sf::Keyboard::Key::Left, board);
 			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) && !isPaused)
 			{
 				controller->movement(sf::Keyboard::Key::Down, board);
 			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up))
+			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) && !isPaused)
 			{
 				controller->movement(sf::Keyboard::Key::Up, board);
 			}
-			
 		}
-		
+			
 				window->clear();
 				time = clock.restart().asSeconds();
 				timer += time;
 				
 
-				if (timer > delay && !controller->isGameOver())
+				if (timer > delay && !controller->isGameOver() && !isPaused)
 				{
 					timer = 0;
 					controller->movement(sf::Keyboard::Key::Down, board);
@@ -62,9 +67,14 @@ void Game::start()
 				controller->draw(*window);
 				board->draw(*window);
 				text->draw(*window);
-
+				
+				if(isPaused)
+				{
+					text->paused(*window);
+				}
+				
 				//Display gameOver Text to the screen
-				//need to add game->reset();
+			
 				if (controller->isGameOver())
 				{
 					text->overText(*window);

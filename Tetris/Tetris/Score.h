@@ -13,7 +13,9 @@ public:
 	void overText(sf::RenderWindow &);
 	void draw(sf::RenderWindow &);
 	void reset();
+	void paused(sf::RenderWindow &);
 private:
+	void constructPause();
 	void constructScore();
 	void constructLevel();
 	void constructGameOver();
@@ -25,4 +27,5 @@ private:
 	sf::Text gameOver_part2;
 	sf::Text scoreText;
 	sf::Text levelText;
+	sf::Text pauseText;
 };

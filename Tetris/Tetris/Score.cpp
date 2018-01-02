@@ -7,6 +7,7 @@ Score::Score(std::string s)
 	constructGameOver();
 	constructLevel();
 	constructScore();
+	constructPause();
 }
 void Score::reset()
 {
@@ -14,6 +15,14 @@ void Score::reset()
 	constructScore();
 }
 //initializes text variables
+void Score::constructPause()
+{
+	pauseText.setString("Paused");
+	pauseText.setFont(font);
+	pauseText.setCharacterSize(70);
+	pauseText.setFillColor(sf::Color::White);
+	pauseText.setPosition(375, 200);
+}
 void Score::constructScore()
 {
 	score = 0;
@@ -46,10 +55,16 @@ void Score::constructGameOver()
 	gameOver_part2.setFillColor(sf::Color::White);
 	gameOver_part2.setPosition(100, 350);
 }
+//draws game over text
 void Score::overText(sf::RenderWindow &window)
 {
 	window.draw(gameOver_part1);
 	window.draw(gameOver_part2);
+}
+//draws paused text
+void Score::paused(sf::RenderWindow &window)
+{
+	window.draw(pauseText);
 }
 //updates text for new values;
 void Score::updateText(int completedRows, int level)
