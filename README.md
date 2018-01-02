@@ -15,7 +15,7 @@ Images
 
 Features to be Implemented
 ------
-- Pause
+- ~~Pause~~
 - Main Menu
 - HighScores list
 - Sound on block clear & gameState change
