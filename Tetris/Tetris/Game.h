@@ -8,6 +8,7 @@ class Game
 {
 private:
 	float time;
+	int prevLevel;
 	sf::Sprite background;
 	sf::Texture backgroundTexture;
 	Score *text;

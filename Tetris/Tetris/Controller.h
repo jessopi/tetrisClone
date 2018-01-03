@@ -2,6 +2,7 @@
 #include <string>
 #include <SFML\Graphics.hpp>
 #include "Board.h"
+#include "gameSound.h"
 #include "Tetromino.h"
 #include "BlockCreation.h"
 
@@ -14,7 +15,7 @@ public:
 	Controller(std::string s);
 	void draw(sf::RenderWindow &);
 	void getNewBlock();
-	void movement(sf::Keyboard::Key , Board* );
+	void movement(sf::Keyboard::Key , Board* ,gameSound &);
 	bool isGameOver();
 	bool endGameCollision(Board );
 	void reset();

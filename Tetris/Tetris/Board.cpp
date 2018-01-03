@@ -19,7 +19,7 @@
 		createGrid();
 	}
 	//checks if a row is filled and then deletes and pushes a new row onto grid
-	void Board::rowFull()
+	void Board::rowFull(gameSound &sound)
 	{
 		completedRows = 0;
 		std::vector<int> row = { 0,0,0,0,0,0,0,0,0,0 };
@@ -38,6 +38,15 @@
 				completedRows++;
 			}
 		}
+		if (completedRows != 0 && completedRows % 4 == 0)
+		{
+			sound.tetrisClear();
+		}
+		else if (completedRows != 0 && completedRows % 4 != 0)
+		{
+			sound.lineClear();
+		}
+
 		totalCompletedRows += completedRows;
 	}
 	//outputs number of completed rows
