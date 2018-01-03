@@ -17,6 +17,7 @@ Features to be Implemented
 ------
 - ~~Pause~~
 - Main Menu
+- Next Block display
 - HighScores list
 - Sound on block clear & gameState change
 
