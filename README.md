@@ -19,7 +19,7 @@ Features to be Implemented
 - Main Menu
 - Next Block display
 - HighScores list
-- Sound on block clear & gameState change
+- ~~Sound on block clear & gameState change~~
 
 Included Files
 ------
