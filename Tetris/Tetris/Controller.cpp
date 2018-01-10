@@ -57,7 +57,7 @@
 		return true;
 	}
 	//Handles movement depending on keyboard event
-	void Controller::movement(sf::Keyboard::Key input, Board* board)
+	void Controller::movement(sf::Keyboard::Key input, Board* board, gameSound &sound)
 	{
 		//Exits function if game is over
 		if (gameOver)
@@ -105,6 +105,7 @@
 					}
 
 					//get the next block
+					sound.landed();
 					getNewBlock();
 
 					//if collision is still occuring after moveback then the game is over

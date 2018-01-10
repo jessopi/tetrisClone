@@ -155,6 +155,7 @@
     <ClCompile Include="BlockCreation.cpp" />
     <ClCompile Include="Board.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="gameSound.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Tetromino.cpp" />
     <ClCompile Include="Controller.cpp" />
@@ -164,6 +165,7 @@
     <ClInclude Include="BlockCreation.h" />
     <ClInclude Include="Board.h" />
     <ClInclude Include="Game.h" />
+    <ClInclude Include="gameSound.h" />
     <ClInclude Include="Tetromino.h" />
     <ClInclude Include="Controller.h" />
     <ClInclude Include="Score.h" />

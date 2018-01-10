@@ -2,16 +2,19 @@
 #include "Board.h"
 #include "Controller.h"
 #include "Score.h"
+#include "gameSound.h"
 //Class the contains the game loop and initializes other class objects
 class Game
 {
 private:
 	float time;
+	int prevLevel;
 	sf::Sprite background;
 	sf::Texture backgroundTexture;
 	Score *text;
 	Board *board;
 	Controller *controller;
+	gameSound *sound;
 	sf::RenderWindow *window;
 	sf::Clock clock;
 	sf::Event event;
