@@ -47,8 +47,20 @@
 				if (nextShape[i][j]) {
 					sf::RectangleShape Block(sf::Vector2f(BlockSize, BlockSize));
 					Block.setTexture(&texture);
+					
 					Block.setTextureRect(next.blockColor());
-					Block.setPosition(600 + (3 + j) * BlockSize, (0 + i) * BlockSize);
+					//aligning shapes with background
+					if (nextShape[i][j] == 1)
+					{
+						Block.setPosition(678 + (j * BlockSize), i * BlockSize + 115);
+					}
+					else if (nextShape[i][j] == 4)
+					{
+						Block.setPosition(675 + (j * BlockSize), i * BlockSize + 100);
+					}
+					else
+						Block.setPosition(695 + (j * BlockSize), i * BlockSize + 102);
+
 					window.draw(Block);
 				}
 			}

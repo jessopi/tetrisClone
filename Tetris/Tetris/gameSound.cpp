@@ -6,7 +6,7 @@
 {
 	 theme.openFromFile(themePath);
 	 theme.setLoop(true);
-	 theme.setVolume(50);
+	 theme.setVolume(1);
 
 	 pausebuffer.loadFromFile(pausePath);
 	 pause.setBuffer(pausebuffer);
@@ -27,14 +27,35 @@
 	 tetrisClearSound.setBuffer(tetrisClearBuffer);
 	 lineClearBuffer.loadFromFile(lineClearPath);
 	 lineClearSound.setBuffer(lineClearBuffer);
+
+	 selectBuffer.loadFromFile("./Audio/select.wav");
+	 selectSound.setBuffer(selectBuffer);
+
+	 mainMenuTheme.openFromFile("./Audio/menu.ogg");
+	 mainMenuTheme.setLoop(true);
+	 mainMenuTheme.setVolume(1);
 }
  void gameSound::playTheme()
  {
-	 theme.play();
+	 if (theme.getStatus() == theme.Playing)
+		 return;
+	 else
+		 theme.play();
  }
  void gameSound::endTheme()
  {
 	 theme.stop();
+ }
+ void gameSound::playMenuTheme()
+ {
+	 if (mainMenuTheme.getStatus() == mainMenuTheme.Playing)
+		 return;
+	 else
+		 mainMenuTheme.play();
+ }
+ void gameSound::endMenuTheme()
+ {
+	 mainMenuTheme.stop();
  }
  void gameSound::playPauseSound()
  {
@@ -46,9 +67,12 @@
  }
  void gameSound::gameOver()
  {
-	 gameOverSound.play();
+		 gameOverSound.play();
  }
-
+ void gameSound::select()
+ {
+	 selectSound.play();
+ }
  void gameSound::landed()
  {
 	 landedSound.play();

@@ -3,6 +3,7 @@
 	Board::Board(){}
 	Board::Board(std::string s)
 	{
+
 		Grid.resize(20, std::vector<int>(10));
 		BlockSize = 35.0;
 		gblocks.setSize(sf::Vector2f(BlockSize, BlockSize));
