@@ -12,6 +12,7 @@ public:
 	BlockCreation();
 	Tetromino nextBlock();
 	void reset();
+	Tetromino peek();
 private:
 	std::random_device rd;
 	int number_of_Shapes;

@@ -14,6 +14,7 @@ class Controller
 public:
 	Controller(std::string s);
 	void draw(sf::RenderWindow &);
+	void drawNext(sf::RenderWindow &);
 	void getNewBlock();
 	void movement(sf::Keyboard::Key , Board* ,gameSound &);
 	bool isGameOver();
@@ -22,9 +23,10 @@ public:
 private:
 	bool gameOver;
 	bool collision(Board );
-	
 	sf::Texture texture;
-	std::vector<std::vector<int>> Shape;
+	std::vector<std::vector<int>> currentShape;
+	std::vector<std::vector<int>> nextShape;
+	Tetromino next;
 	Tetromino current;
 	BlockCreation rTet;
 	sf::Vector2f currentPos;

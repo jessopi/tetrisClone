@@ -17,6 +17,9 @@ public:
 	void levelIncrease();
 	void lineClear();
 	void tetrisClear();
+	void select();
+	void playMenuTheme();
+	void endMenuTheme();
 private:
 	sf::Music theme;
 	sf::Sound pause;
@@ -34,5 +37,10 @@ private:
 	sf::SoundBuffer levelIncreaseBuffer;
 	sf::SoundBuffer lineClearBuffer;
 	sf::SoundBuffer tetrisClearBuffer;
+
+	sf::SoundBuffer selectBuffer;
+	sf::Sound selectSound;
+
+	sf::Music mainMenuTheme;
 
 };
