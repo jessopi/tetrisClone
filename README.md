@@ -16,9 +16,10 @@ Images
 Features to be Implemented
 ------
 - ~~Pause~~
-- Main Menu
-- HighScores list
-- Sound on block clear & gameState change
+- ~~Main Menu~~
+- ~~Next Block display~~
+- ~~HighScores list~~
+- ~~Sound on block clear & gameState change~~
 
 Included Files
 ------
