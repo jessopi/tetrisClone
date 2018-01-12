@@ -18,7 +18,7 @@ Features to be Implemented
 - ~~Pause~~
 - ~~Main Menu~~
 - ~~Next Block display~~
-- HighScores list
+- ~~HighScores list~~
 - ~~Sound on block clear & gameState change~~
 
 Included Files
