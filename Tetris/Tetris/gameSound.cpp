@@ -10,27 +10,32 @@
 
 	 pausebuffer.loadFromFile(pausePath);
 	 pause.setBuffer(pausebuffer);
-
+	 pause.setVolume(6);
 	 //fix volume for beep
 	 rotateBuffer.loadFromFile(rotationPath);
 	 rotation.setBuffer(rotateBuffer);
+	 rotation.setVolume(10);
 
 	 gameOverBuffer.loadFromFile(gameOverPath);
 	 gameOverSound.setBuffer(gameOverBuffer);
-
+	 gameOverSound.setVolume(20);
 
 	 landedBuffer.loadFromFile(landedPath);
 	 landedSound.setBuffer(landedBuffer);
+	 landedSound.setVolume(10);
 	 levelIncreaseBuffer.loadFromFile(levelIncreasePath);
 	 levelIncreaseSound.setBuffer(levelIncreaseBuffer);
+	 levelIncreaseSound.setVolume(10);
 	 tetrisClearBuffer.loadFromFile(tetrisClearPath);
 	 tetrisClearSound.setBuffer(tetrisClearBuffer);
+	 tetrisClearSound.setVolume(10);
 	 lineClearBuffer.loadFromFile(lineClearPath);
 	 lineClearSound.setBuffer(lineClearBuffer);
+	 lineClearSound.setVolume(10);
 
 	 selectBuffer.loadFromFile("./Audio/select.wav");
 	 selectSound.setBuffer(selectBuffer);
-
+	 selectSound.setVolume(20);
 	 mainMenuTheme.openFromFile("./Audio/menu.ogg");
 	 mainMenuTheme.setLoop(true);
 	 mainMenuTheme.setVolume(1);

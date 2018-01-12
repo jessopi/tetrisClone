@@ -47,56 +47,11 @@
 		{
 			sound.lineClear();
 		}
-
-		totalCompletedRows += completedRows;
 	}
 	//outputs number of completed rows
 	int Board::getCompletedRows()
 	{
 		return completedRows;
-	}
-	//outputs current level according to completed rows
-	int Board::getLevel()
-	{
-		if (totalCompletedRows < 10)
-		{
-			return 1;
-		}
-		else if (totalCompletedRows < 20)
-		{
-			return 2;
-		}
-		else if (totalCompletedRows < 30)
-		{
-			return 3;
-		}
-		else if (totalCompletedRows < 40)
-		{
-			return 4;
-		}
-		else if (totalCompletedRows < 50)
-		{
-			return 5;
-		}
-		else if (totalCompletedRows < 60)
-		{
-			return 6;
-		}
-		else if (totalCompletedRows < 70)
-		{
-			return 7;
-		}
-		else if (totalCompletedRows < 80)
-		{
-			return 8;
-		}
-		else if (totalCompletedRows < 90)
-		{
-			return 9;
-		}
-		else
-			return 10;
-
 	}
 	//draws blocks to screen according to the index
 	void Board::draw(sf::RenderWindow &window)

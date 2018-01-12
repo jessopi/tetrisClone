@@ -1,5 +1,5 @@
 #include "HighScores.h"
-
+#include <algorithm>
 HighScores::HighScores()
 {
 	theme = tgui::Theme::create("./Black.txt");
@@ -29,42 +29,24 @@ void HighScores::construct_scoreBox()
 	scoreBox = tgui::ListBox::create();
 	scoreBox->setSize(400, 450);
 	scoreBox->setPosition(300, 100);
-	scoreBox->addItem("");
-	scoreBox->addItem("Ian						45,000");
-	scoreBox->addItem("");
-	scoreBox->addItem("Ian						37,000");
-	scoreBox->addItem("");
+	//scoreBox->setMaximumItems(10);
+	scoreBox->setItemHeight(35);
+	//scoreBox->setTextSize(35);
 
-	scoreBox->addItem("Ian						36,000");
-	scoreBox->addItem("");
-
-	scoreBox->addItem("Ian						35,000");
-	scoreBox->addItem("");
-
-	scoreBox->addItem("Ian						34,000");
-	scoreBox->addItem("");
-
-	scoreBox->addItem("Ian						33,000");
-	scoreBox->addItem("");
-
-	scoreBox->addItem("Ian						32,000");
-	scoreBox->addItem("");
-
-	scoreBox->addItem("Ian						31,000");
-	scoreBox->addItem("");
-
-	scoreBox->addItem("Ian						30,000");
-	scoreBox->addItem("");
-
-	scoreBox->addItem("Ian						29,000");
-	scoreBox->setTextSize(35);
 	auto boxsettings = scoreBox->getRenderer();
 	boxsettings->setBackgroundColor(sf::Color::Black);
 	boxsettings->setTextColor(sf::Color::White);
 	boxsettings->setTextColorHover(sf::Color::White);
 	boxsettings->setHoverBackgroundColor(sf::Color::Black);
-
 	gui.add(scoreBox);
+}
+void HighScores::getList(std::vector<std::pair<std::string,int>> &list)
+{
+	scoreBox->removeAllItems();
+	for (auto &e : list)
+	{
+		scoreBox->addItem(e.first + "										" + std::to_string(e.second));	
+	}
 }
 void HighScores::display(sf::RenderWindow & window,int currentState, gameSound &sound)
 {
