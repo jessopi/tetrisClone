@@ -17,7 +17,8 @@ Game::Game()
 	board = new Board("./Images/blocks.png");
 	controller = new Controller("./Images/blocks.png");
 	sound = new gameSound("./Audio/theme.ogg","./Audio/pause.wav","./Audio/block-rotate.wav",
-		"./Audio/gameOver.wav","./Audio/landed.wav","./Audio/lvlup.wav","./Audio/normalClear.wav","./Audio/tetrisClear.wav");
+		"./Audio/gameOver.wav","./Audio/landed.wav","./Audio/lvlup.wav","./Audio/normalClear.wav","./Audio/tetrisClear.wav"
+		,"./Audio/select.wav","./Audio/Win.wav");
 	backgroundTexture.loadFromFile("./Images/Frame1.png");
 	background.setTexture(backgroundTexture);
 	background.setPosition(280, 0);
@@ -64,6 +65,7 @@ void Game::start()
 			}
 			case::Game::GameEnding:
 			{
+				
 				//needs to add bgm for highscore!;
 				//popup needs to take in sound object for confirm button
 				pu->draw();
@@ -91,7 +93,7 @@ void Game::loop()
 		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
 		{
 			isPaused = !isPaused;
-			sound->playPauseSound();
+			sound->playSFX("Pause");
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) && !isPaused)
 		{
@@ -107,13 +109,13 @@ void Game::loop()
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) && !isPaused)
 		{
-			sound->rotationSFX();
+			sound->playSFX("Rotate");
 			controller->movement(sf::Keyboard::Key::Up, board, *sound);
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
 		{
 			_gameState = ShowingMenu;
-			sound->playPauseSound();
+			sound->playSFX("Rotate");
 		}
 	}
 
@@ -142,23 +144,16 @@ void Game::loop()
 		text->paused(*window);
 	}
 
-	//Display gameOver Text to the screen
-
-	
 	if (controller->isGameOver())
 	{
 		sound->endTheme();
-		sound->gameOver();
+
 		if (score->isNewHighScore() && popUpEntry == true)
 		{
 			_gameState = GameEnding;
 			popUpEntry = false;
+			sound->playSFX("HighScore");
 		}
-
-		//still a problem needs to sound once!, create a checker in sound->gameOver(class)
-		//sound->gameOver();
-
-
 
 		//fix what overText says
 		//Spacebar to play again, Esc to go to main menu;
@@ -190,8 +185,7 @@ void Game::updateDelay(int level)
 {
 	if (level > prevLevel)
 	{
-		//sound is not very good quality and slightly too long
-		sound->levelIncrease();
+		sound->playSFX("LevelIncrease");
 		prevLevel = level;
 	}
 	switch (level)

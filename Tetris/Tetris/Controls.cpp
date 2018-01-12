@@ -67,5 +67,5 @@ void Controls::display(sf::RenderWindow & window, int currentState,gameSound &so
 		window.display();
 
 	}
-	sound.select();
+	sound.playSFX("Select");
 }

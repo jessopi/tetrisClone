@@ -41,11 +41,11 @@
 		}
 		if (completedRows != 0 && completedRows % 4 == 0)
 		{
-			sound.tetrisClear();
+			sound.playSFX("TetrisClear");
 		}
 		else if (completedRows != 0 && completedRows % 4 != 0)
 		{
-			sound.lineClear();
+			sound.playSFX("LineClear");
 		}
 	}
 	//outputs number of completed rows

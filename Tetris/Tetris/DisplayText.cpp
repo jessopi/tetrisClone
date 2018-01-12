@@ -49,10 +49,10 @@ void DisplayText::constructGameOver()
 
 	
 	gameOver_part2.setFont(font);
-	gameOver_part2.setString("Press spacebar to play again or Esc to quit!");
+	gameOver_part2.setString("Press spacebar to play again\n			 or\n Esc to go to the MainMenu!");
 	gameOver_part2.setCharacterSize(30);
 	gameOver_part2.setFillColor(sf::Color::White);
-	gameOver_part2.setPosition(100, 350);
+	gameOver_part2.setPosition(225, 345);
 }
 //draws game over text
 void DisplayText::overText(sf::RenderWindow &window)

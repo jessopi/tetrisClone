@@ -138,13 +138,14 @@
 					}
 
 					//get the next block
-					sound.landed();
+					sound.playSFX("Collision");
 					getNewBlock();
 
 					//if collision is still occuring after moveback then the game is over
 					if (!endGameCollision(*board))
 					{
 						gameOver = true;
+						sound.playSFX("GameOver");
 						return;
 					}
 

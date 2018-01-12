@@ -1,46 +1,48 @@
 #include "gameSound.h"
 
- gameSound::gameSound(std::string themePath,std::string pausePath,std::string rotationPath,
-	 std::string gameOverPath,std::string landedPath,std::string levelIncreasePath,
-	 std::string lineClearPath, std::string tetrisClearPath)
+gameSound::gameSound(std::string themePath, std::string pausePath, std::string rotatePath,
+	std::string gameOverPath, std::string collisionPath, std::string levelIncreasePath,
+	std::string lineClearPath, std::string tetrisClearPath, std::string selectPath,std::string highScorePath)
 {
-	 played = false;
 	 theme.openFromFile(themePath);
 	 theme.setLoop(true);
 	 theme.setVolume(1);
 
-	 pausebuffer.loadFromFile(pausePath);
-	 pause.setBuffer(pausebuffer);
-	 pause.setVolume(6);
-	 //fix volume for beep
-	 rotateBuffer.loadFromFile(rotationPath);
-	 rotation.setBuffer(rotateBuffer);
-	 rotation.setVolume(10);
-
-	 gameOverBuffer.loadFromFile(gameOverPath);
-	 gameOverSound.setBuffer(gameOverBuffer);
-	 gameOverSound.setVolume(20);
-
-	 landedBuffer.loadFromFile(landedPath);
-	 landedSound.setBuffer(landedBuffer);
-	 landedSound.setVolume(10);
-	 levelIncreaseBuffer.loadFromFile(levelIncreasePath);
-	 levelIncreaseSound.setBuffer(levelIncreaseBuffer);
-	 levelIncreaseSound.setVolume(10);
-	 tetrisClearBuffer.loadFromFile(tetrisClearPath);
-	 tetrisClearSound.setBuffer(tetrisClearBuffer);
-	 tetrisClearSound.setVolume(10);
-	 lineClearBuffer.loadFromFile(lineClearPath);
-	 lineClearSound.setBuffer(lineClearBuffer);
-	 lineClearSound.setVolume(10);
-
-	 selectBuffer.loadFromFile("./Audio/select.wav");
-	 selectSound.setBuffer(selectBuffer);
-	 selectSound.setVolume(20);
 	 mainMenuTheme.openFromFile("./Audio/menu.ogg");
 	 mainMenuTheme.setLoop(true);
 	 mainMenuTheme.setVolume(1);
+
+	 pause.loadFromFile(pausePath);
+	 rotate.loadFromFile(rotatePath);
+	 select.loadFromFile(selectPath);
+
+	 collision.loadFromFile(collisionPath);
+	 levelIncrease.loadFromFile(levelIncreasePath);
+
+	 lineClear.loadFromFile(lineClearPath);
+	 tetrisClear.loadFromFile(tetrisClearPath);
+
+	 highScore.loadFromFile(highScorePath);
+	 gameOver.loadFromFile(gameOverPath);
+
+	 //Case-Sensitive
+	 sfxMap["Pause"] = pause;
+	 sfxMap["Rotate"] = rotate;
+	 sfxMap["Select"] = select;
+	 sfxMap["Collision"] = collision;
+	 sfxMap["LevelIncrease"] = levelIncrease;
+	 sfxMap["LineClear"] = lineClear;
+	 sfxMap["TetrisClear"] = tetrisClear;
+	 sfxMap["HighScore"] = highScore;
+	 sfxMap["GameOver"] = gameOver;
+
 }
+ void gameSound::playSFX(std::string trackName)
+ {
+	 sound.setBuffer(sfxMap[trackName]);
+	 sound.setVolume(10);
+	 sound.play();
+ }
  void gameSound::playTheme()
  {
 	 if (theme.getStatus() == theme.Playing)
@@ -62,40 +64,4 @@
  void gameSound::endMenuTheme()
  {
 	 mainMenuTheme.stop();
- }
- void gameSound::playPauseSound()
- {
-	 pause.play();
- }
- void gameSound::rotationSFX()
- {
-	 rotation.play();
- }
- void gameSound::gameOver()
- {
-	 if (!played)
-	 {
-		 gameOverSound.play();
-		 played = true;
-	 }
- }
- void gameSound::select()
- {
-	 selectSound.play();
- }
- void gameSound::landed()
- {
-	 landedSound.play();
- }
- void gameSound::levelIncrease()
- {
-	 levelIncreaseSound.play();
- }
- void gameSound::lineClear()
- {
-	 lineClearSound.play();
- }
- void gameSound::tetrisClear()
- {
-	 tetrisClearSound.play();
  }

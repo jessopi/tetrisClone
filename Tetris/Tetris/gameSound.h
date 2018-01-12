@@ -1,47 +1,38 @@
 #pragma once
 #include <SFML\Audio.hpp>
 #include <string>
+#include <unordered_map>
 class gameSound
 {
 public:
-	//questionable declaration
-	//might be a better way of getting file paths
-	gameSound(std::string,std::string,std::string,std::string, std::string, std::string, std::string, std::string);
+	//Move into calling file locations from constructor instead of passing them in?
+	gameSound(std::string,std::string,std::string,std::string, 
+		std::string, std::string, std::string, std::string,std::string,std::string);
 	gameSound();
 	void playTheme();
 	void endTheme();
-	void rotationSFX();
-	void playPauseSound();
-	void gameOver();
-	void landed();
-	void levelIncrease();
-	void lineClear();
-	void tetrisClear();
-	void select();
 	void playMenuTheme();
 	void endMenuTheme();
+	void playSFX(std::string);
+
 private:
-	bool played;
+
 	sf::Music theme;
-	sf::Sound pause;
-	sf::Sound rotation;
-	sf::Sound gameOverSound;
-	sf::Sound landedSound;
-	sf::Sound levelIncreaseSound;
-	sf::Sound lineClearSound;
-	sf::Sound tetrisClearSound;
-
-	sf::SoundBuffer pausebuffer;
-	sf::SoundBuffer rotateBuffer;
-	sf::SoundBuffer gameOverBuffer;
-	sf::SoundBuffer landedBuffer;
-	sf::SoundBuffer levelIncreaseBuffer;
-	sf::SoundBuffer lineClearBuffer;
-	sf::SoundBuffer tetrisClearBuffer;
-
-	sf::SoundBuffer selectBuffer;
-	sf::Sound selectSound;
-
 	sf::Music mainMenuTheme;
 
+	sf::SoundBuffer pause;
+	sf::SoundBuffer rotate;
+	sf::SoundBuffer select;
+	sf::SoundBuffer collision;
+	sf::SoundBuffer levelIncrease;
+
+	sf::SoundBuffer lineClear;
+	sf::SoundBuffer tetrisClear;
+
+	sf::SoundBuffer highScore;
+	sf::SoundBuffer gameOver;
+
+	sf::Sound sound;
+
+	std::unordered_map<std::string, sf::SoundBuffer> sfxMap;
 };

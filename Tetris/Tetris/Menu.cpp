@@ -73,5 +73,5 @@ void Menu::display(sf::RenderWindow &window,int currentState, gameSound &sound)
 		window.display();
 
 	}
-	sound.select();
+	sound.playSFX("Select");
 }

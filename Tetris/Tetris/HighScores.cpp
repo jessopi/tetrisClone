@@ -86,5 +86,5 @@ void HighScores::display(sf::RenderWindow & window,int currentState, gameSound &
 		window.display();
 
 	}
-	sound.select();
+	sound.playSFX("Select");
 }
