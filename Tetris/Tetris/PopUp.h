@@ -12,6 +12,7 @@ private:
 	void construct_confirmButton();
 	void construct_playerNameBox();
 	std::string playerName;
+	int playerScore;
 	sf::RenderWindow *window;
 	tgui::Gui gui;
 	sf::Text f;
@@ -20,5 +21,6 @@ private:
 	sf::Event event;
 	tgui::Theme::Ptr theme;
 	tgui::EditBox::Ptr playerNameBox;
+	
 	tgui::Button::Ptr confirmBUtton;
 };

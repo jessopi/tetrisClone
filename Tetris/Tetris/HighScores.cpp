@@ -7,8 +7,8 @@ HighScores::HighScores()
 	auto picture = tgui::Picture::create("./Images/t.png");
 	picture->setSize(1024, 768);
 	picture->setOpacity(.5);
-	construct_scoreBox();
-
+	construct_playerNameList();
+	construct_playerScoreList();
 	gui.add(picture);
 	contruct_backButton();
 
@@ -23,29 +23,44 @@ void HighScores::contruct_backButton()
 	gui.add(backButton);
 }
 //temp until db is added
-void HighScores::construct_scoreBox()
+void HighScores::construct_playerNameList()
 {
 	//scoreBox = theme->load("ListBox");
-	scoreBox = tgui::ListBox::create();
-	scoreBox->setSize(400, 450);
-	scoreBox->setPosition(300, 100);
-	//scoreBox->setMaximumItems(10);
-	scoreBox->setItemHeight(35);
-	//scoreBox->setTextSize(35);
+	playerNameList = tgui::ListBox::create();
+	playerNameList->setSize(200, 450);
+	playerNameList->setPosition(200, 100);
+	playerNameList->setItemHeight(35);
 
-	auto boxsettings = scoreBox->getRenderer();
+	auto boxsettings = playerNameList->getRenderer();
 	boxsettings->setBackgroundColor(sf::Color::Black);
 	boxsettings->setTextColor(sf::Color::White);
 	boxsettings->setTextColorHover(sf::Color::White);
 	boxsettings->setHoverBackgroundColor(sf::Color::Black);
-	gui.add(scoreBox);
+	gui.add(playerNameList);
+}
+void HighScores::construct_playerScoreList()
+{
+	//scoreBox = theme->load("ListBox");
+	playerScoreList = tgui::ListBox::create();
+	playerScoreList->setSize(200, 450);
+	playerScoreList->setPosition(700, 100);
+	playerScoreList->setItemHeight(35);
+
+	auto boxsettings = playerScoreList->getRenderer();
+	boxsettings->setBackgroundColor(sf::Color::Black);
+	boxsettings->setTextColor(sf::Color::White);
+	boxsettings->setTextColorHover(sf::Color::White);
+	boxsettings->setHoverBackgroundColor(sf::Color::Black);
+	gui.add(playerScoreList);
 }
 void HighScores::getList(std::vector<std::pair<std::string,int>> &list)
 {
-	scoreBox->removeAllItems();
+	playerNameList->removeAllItems();
+	playerScoreList->removeAllItems();
 	for (auto &e : list)
 	{
-		scoreBox->addItem(e.first + "										" + std::to_string(e.second));	
+		playerNameList->addItem(e.first);
+		playerScoreList->addItem(std::to_string(e.second));
 	}
 }
 void HighScores::display(sf::RenderWindow & window,int currentState, gameSound &sound)

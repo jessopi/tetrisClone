@@ -4,6 +4,7 @@
 	 std::string gameOverPath,std::string landedPath,std::string levelIncreasePath,
 	 std::string lineClearPath, std::string tetrisClearPath)
 {
+	 played = false;
 	 theme.openFromFile(themePath);
 	 theme.setLoop(true);
 	 theme.setVolume(1);
@@ -72,7 +73,11 @@
  }
  void gameSound::gameOver()
  {
+	 if (!played)
+	 {
 		 gameOverSound.play();
+		 played = true;
+	 }
  }
  void gameSound::select()
  {

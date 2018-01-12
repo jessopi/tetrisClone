@@ -14,7 +14,7 @@ public:
 protected:
 	enum GameState
 	{
-		displayMenu, displayGame, displayScore, displayControls, Exit
+		displayMenu, displayGame, displayScore, displayControls, Exit = 5
 	};
 	GameState state;
 	void changeState(GameState input)

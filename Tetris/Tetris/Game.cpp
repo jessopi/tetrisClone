@@ -5,7 +5,7 @@
 
 Game::Game()
 {
-	test = 0;
+	popUpEntry = true;
 	prevLevel = 1;
 	isPaused = false;
 	pu = new Popup("./Black.txt");
@@ -27,12 +27,6 @@ Game::Game()
 	delay = 0.8F; //in milliseconds
 	_gameState = Game::ShowingMenu;
 }
-
-/* Sounds to be added in
-gameover Sound
-
-bgm louder or quieter than sound effects?
-*/
 
 void Game::start()
 {
@@ -66,6 +60,15 @@ void Game::start()
 				h->getList(score->leaderBoard());
 				h->display(*window,_gameState,*sound);
 				_gameState = (GameState)h->getState();
+				break;
+			}
+			case::Game::GameEnding:
+			{
+				//needs to add bgm for highscore!;
+				//popup needs to take in sound object for confirm button
+				pu->draw();
+				score->updateLeaderBoard(pu->enteredName());
+				_gameState = Playing;
 				break;
 			}
 			case::Game::Exiting:
@@ -142,24 +145,24 @@ void Game::loop()
 	//Display gameOver Text to the screen
 
 	
-	window->display();
 	if (controller->isGameOver())
 	{
 		sound->endTheme();
-
-		if (test == 0)
+		sound->gameOver();
+		if (score->isNewHighScore() && popUpEntry == true)
 		{
-			sound->gameOver();
-			test = 1;
-			if (score->isNewHighScore())
-			{
-				std::cout << "WINNER" << std::endl;
-				pu->draw();
-				score->updateLeaderBoard(pu->enteredName());
-			}
+			_gameState = GameEnding;
+			popUpEntry = false;
 		}
 
+		//still a problem needs to sound once!, create a checker in sound->gameOver(class)
+		//sound->gameOver();
 
+
+
+		//fix what overText says
+		//Spacebar to play again, Esc to go to main menu;
+		//when hitting esc game should reset;
 		text->overText(*window);
 
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
@@ -167,11 +170,13 @@ void Game::loop()
 			reset();
 		}
 	}
+	window->display();
+
 }
 //call reset for all classes/variable
 void Game::reset()
 {
-	test = 0;
+	popUpEntry = true;
 	text->reset();
 	score->reset();
 	board->reset();

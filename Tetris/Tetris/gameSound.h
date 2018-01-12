@@ -21,6 +21,7 @@ public:
 	void playMenuTheme();
 	void endMenuTheme();
 private:
+	bool played;
 	sf::Music theme;
 	sf::Sound pause;
 	sf::Sound rotation;

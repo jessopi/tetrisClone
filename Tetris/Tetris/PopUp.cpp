@@ -4,7 +4,7 @@ Popup::Popup(std::string path)
 {
 	theme = tgui::Theme::create(path);
 	playerName = "";
-	auto picture = tgui::Picture::create("./Images/mm.png");
+	//auto picture = tgui::Picture::create("./Images/mm.png");
 //	gui.add(picture);
 	construct_confirmButton();
 	construct_playerNameBox();
@@ -12,7 +12,7 @@ Popup::Popup(std::string path)
 
 	
 
-	picture->setSize(500, 200);
+	//picture->setSize(500, 200);
 }
 
 void Popup::construct_confirmButton()

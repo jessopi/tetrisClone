@@ -13,7 +13,7 @@
 class Game
 {
 private:
-	int test;
+	bool popUpEntry;
 	float time;
 	int prevLevel;
 	sf::Sprite background;
@@ -36,7 +36,7 @@ private:
 	void updateDelay(int);
 	void reset();
 	enum GameState 
-	{ShowingMenu, Playing, displayingHighScores, displayingControls, Exiting};
+	{ShowingMenu, Playing, displayingHighScores, displayingControls, GameEnding, Exiting};
 	void loop();
 	GameState _gameState;
 
