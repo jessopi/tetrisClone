@@ -17,7 +17,6 @@ public:
 	void draw(sf::RenderWindow &);
 	int getCompletedRows();
 	void rowFull(gameSound &sound);
-	int getLevel();
 	void reset();
 private:
 	sf::RectangleShape gblocks;

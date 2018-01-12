@@ -160,9 +160,11 @@
     <ClCompile Include="HighScores.cpp" />
     <ClCompile Include="Main.cpp" />
     <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="PopUp.cpp" />
+    <ClCompile Include="Score.cpp" />
     <ClCompile Include="Tetromino.cpp" />
     <ClCompile Include="Controller.cpp" />
-    <ClCompile Include="Score.cpp" />
+    <ClCompile Include="DisplayText.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BlockCreation.h" />
@@ -172,10 +174,15 @@
     <ClInclude Include="gameSound.h" />
     <ClInclude Include="HighScores.h" />
     <ClInclude Include="Menu.h" />
+    <ClInclude Include="PopUp.h" />
+    <ClInclude Include="Score.h" />
     <ClInclude Include="Tetromino.h" />
     <ClInclude Include="Controller.h" />
-    <ClInclude Include="Score.h" />
+    <ClInclude Include="DisplayText.h" />
     <ClInclude Include="Ui.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="leaderBoard.dat" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -8,10 +8,12 @@ Game::Game()
 	test = 0;
 	prevLevel = 1;
 	isPaused = false;
+	pu = new Popup("./Black.txt");
 	h = new HighScores();
 	m = new Menu();
 	c = new Controls();
-	text = new Score("./Font/courbd.ttf");
+	score = new Score("./leaderBoard.dat");
+	text = new DisplayText("./Font/courbd.ttf");
 	board = new Board("./Images/blocks.png");
 	controller = new Controller("./Images/blocks.png");
 	sound = new gameSound("./Audio/theme.ogg","./Audio/pause.wav","./Audio/block-rotate.wav",
@@ -31,21 +33,13 @@ gameover Sound
 
 bgm louder or quieter than sound effects?
 */
+
 void Game::start()
 {
-	//cant play here since this is menu
-	//sound->playTheme();
 	while (window->isOpen())
 	{
 		switch (_gameState)
 		{
-
-			/*
-				select sound plays
-					when button are clicked
-				
-			
-			*/
 			case Game::ShowingMenu:
 			{	
 				sound->playMenuTheme();
@@ -69,6 +63,7 @@ void Game::start()
 			}
 			case::Game::displayingHighScores:
 			{
+				h->getList(score->leaderBoard());
 				h->display(*window,_gameState,*sound);
 				_gameState = (GameState)h->getState();
 				break;
@@ -81,6 +76,7 @@ void Game::start()
 		}
 	}
 }
+
 void Game::loop() 
 {
 	
@@ -128,8 +124,10 @@ void Game::loop()
 	}
 
 	board->rowFull(*sound);
-	text->updateText(board->getCompletedRows(), board->getLevel());
-	updateDelay(board->getLevel());
+
+	score->getNumberOfRowsCleared(board->getCompletedRows());
+	text->updateText(score->currentScore(), score->currentLevel());
+	updateDelay(score->currentLevel());
 	window->clear();
 	window->draw(background);
 	controller->draw(*window);
@@ -143,28 +141,39 @@ void Game::loop()
 
 	//Display gameOver Text to the screen
 
+	
+	window->display();
 	if (controller->isGameOver())
 	{
+		sound->endTheme();
+
 		if (test == 0)
 		{
 			sound->gameOver();
 			test = 1;
+			if (score->isNewHighScore())
+			{
+				std::cout << "WINNER" << std::endl;
+				pu->draw();
+				score->updateLeaderBoard(pu->enteredName());
+			}
 		}
-		text->overText(*window);
-		sound->endTheme();
 
-		
+
+		text->overText(*window);
+
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
 		{
-			reset();	 
+			reset();
 		}
 	}
-	window->display();
 }
 //call reset for all classes/variable
 void Game::reset()
 {
+	test = 0;
 	text->reset();
+	score->reset();
 	board->reset();
 	controller->reset();
 	//sound->playTheme();

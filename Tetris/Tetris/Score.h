@@ -1,31 +1,29 @@
 #pragma once
-#include <string>
-#include <SFML\Graphics.hpp>
-/*
-*	Handles and displays text to screen
-*/
+#include <vector>
+#include <fstream>
+#include <sstream>
+
 class Score
 {
 public:
-	Score();
 	Score(std::string);
-	void updateText(int,int);
-	void overText(sf::RenderWindow &);
-	void draw(sf::RenderWindow &);
 	void reset();
-	void paused(sf::RenderWindow &);
+
+	bool isNewHighScore();
+	
+	std::vector<std::pair<std::string, int>> leaderBoard();
+
+	void updateLeaderBoard(std::string);
+	int currentScore();
+	int currentLevel();
+	void getNumberOfRowsCleared(int);
 private:
-	void constructPause();
-	void constructScore();
-	void constructLevel();
-	void constructGameOver();
-	int score;
-	void calculateScore(int,int);
-	void updatePosition();
-	sf::Font font;
-	sf::Text gameOver_part1;
-	sf::Text gameOver_part2;
-	sf::Text scoreText;
-	sf::Text levelText;
-	sf::Text pauseText;
+	void readFile(std::string);
+	void calculateScore(int);
+	void calculateLevel(int);
+
+	int level;
+	int playerScore;
+	int totalRowsCompleted;
+	std::vector<std::pair<std::string, int>> topScores;
 };
