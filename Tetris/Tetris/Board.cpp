@@ -3,6 +3,7 @@
 	Board::Board(){}
 	Board::Board(std::string s)
 	{
+
 		Grid.resize(20, std::vector<int>(10));
 		BlockSize = 35.0;
 		gblocks.setSize(sf::Vector2f(BlockSize, BlockSize));
@@ -19,7 +20,7 @@
 		createGrid();
 	}
 	//checks if a row is filled and then deletes and pushes a new row onto grid
-	void Board::rowFull()
+	void Board::rowFull(gameSound &sound)
 	{
 		completedRows = 0;
 		std::vector<int> row = { 0,0,0,0,0,0,0,0,0,0 };
@@ -38,55 +39,19 @@
 				completedRows++;
 			}
 		}
-		totalCompletedRows += completedRows;
+		if (completedRows != 0 && completedRows % 4 == 0)
+		{
+			sound.tetrisClear();
+		}
+		else if (completedRows != 0 && completedRows % 4 != 0)
+		{
+			sound.lineClear();
+		}
 	}
 	//outputs number of completed rows
 	int Board::getCompletedRows()
 	{
 		return completedRows;
-	}
-	//outputs current level according to completed rows
-	int Board::getLevel()
-	{
-		if (totalCompletedRows < 10)
-		{
-			return 1;
-		}
-		else if (totalCompletedRows < 20)
-		{
-			return 2;
-		}
-		else if (totalCompletedRows < 30)
-		{
-			return 3;
-		}
-		else if (totalCompletedRows < 40)
-		{
-			return 4;
-		}
-		else if (totalCompletedRows < 50)
-		{
-			return 5;
-		}
-		else if (totalCompletedRows < 60)
-		{
-			return 6;
-		}
-		else if (totalCompletedRows < 70)
-		{
-			return 7;
-		}
-		else if (totalCompletedRows < 80)
-		{
-			return 8;
-		}
-		else if (totalCompletedRows < 90)
-		{
-			return 9;
-		}
-		else
-			return 10;
-
 	}
 	//draws blocks to screen according to the index
 	void Board::draw(sf::RenderWindow &window)

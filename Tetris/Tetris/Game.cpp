@@ -1,103 +1,194 @@
 #include "Game.h"
 #include <iostream>
+#include "SFML\Graphics.hpp"]
+#include "TGUI\TGUI.hpp"
+
 Game::Game()
 {
+	test = 0;
+	prevLevel = 1;
 	isPaused = false;
-	text = new Score("./Font/courbd.ttf");
+	pu = new Popup("./Black.txt");
+	h = new HighScores();
+	m = new Menu();
+	c = new Controls();
+	score = new Score("./leaderBoard.dat");
+	text = new DisplayText("./Font/courbd.ttf");
 	board = new Board("./Images/blocks.png");
 	controller = new Controller("./Images/blocks.png");
-	backgroundTexture.loadFromFile("./Images/Frame.png");
+	sound = new gameSound("./Audio/theme.ogg","./Audio/pause.wav","./Audio/block-rotate.wav",
+		"./Audio/gameOver.wav","./Audio/landed.wav","./Audio/lvlup.wav","./Audio/normalClear.wav","./Audio/tetrisClear.wav");
+	backgroundTexture.loadFromFile("./Images/Frame1.png");
 	background.setTexture(backgroundTexture);
 	background.setPosition(280, 0);
 	window = new sf::RenderWindow(sf::VideoMode(1024, 768), "Tetris!", sf::Style::Close | sf::Style::Titlebar);
 	timer = 0;
 	time = 0;
 	delay = 0.8F; //in milliseconds
+	_gameState = Game::ShowingMenu;
 }
+
+/* Sounds to be added in
+gameover Sound
+
+bgm louder or quieter than sound effects?
+*/
 
 void Game::start()
 {
 	while (window->isOpen())
 	{
-		
-		//add game over here
-		while (window->pollEvent(event))
+		switch (_gameState)
 		{
-			if (event.type == sf::Event::Closed || sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
+			case Game::ShowingMenu:
+			{	
+				sound->playMenuTheme();
+				sound->endTheme();
+				m->display(*window,_gameState,*sound);
+				_gameState = (GameState)m->getState();
+				break;
+			}
+			case::Game::Playing:
+			{
+				sound->endMenuTheme();
+				sound->playTheme();
+				loop();
+				break;
+			}
+			case::Game::displayingControls:
+			{
+				c->display(*window, _gameState,*sound);
+				_gameState = (GameState)c->getState();
+				break;
+			}
+			case::Game::displayingHighScores:
+			{
+				h->getList(score->leaderBoard());
+				h->display(*window,_gameState,*sound);
+				_gameState = (GameState)h->getState();
+				break;
+			}
+			case::Game::Exiting:
+			{
 				window->close();
-			//pauses game
-			if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
-			{
-				isPaused = !isPaused;
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) && !isPaused)
-			{
-				controller->movement(sf::Keyboard::Key::Right, board);
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) && !isPaused)
-			{
-				controller->movement(sf::Keyboard::Key::Left, board);
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) && !isPaused)
-			{
-				controller->movement(sf::Keyboard::Key::Down, board);
-			}
-			if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) && !isPaused)
-			{
-				controller->movement(sf::Keyboard::Key::Up, board);
+				break;
 			}
 		}
-			
-				window->clear();
-				time = clock.restart().asSeconds();
-				timer += time;
-				
+	}
+}
 
-				if (timer > delay && !controller->isGameOver() && !isPaused)
-				{
-					timer = 0;
-					controller->movement(sf::Keyboard::Key::Down, board);
-				}
+void Game::loop() 
+{
+	
+	while (window->pollEvent(event))
+	{
+		if (event.type == sf::Event::Closed )
+			window->close();
+		//pauses game
+		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
+		{
+			isPaused = !isPaused;
+			sound->playPauseSound();
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) && !isPaused)
+		{
+			controller->movement(sf::Keyboard::Key::Right, board, *sound);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) && !isPaused)
+		{
+			controller->movement(sf::Keyboard::Key::Left, board, *sound);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Down) && !isPaused)
+		{
+			controller->movement(sf::Keyboard::Key::Down, board, *sound);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Up) && !isPaused)
+		{
+			sound->rotationSFX();
+			controller->movement(sf::Keyboard::Key::Up, board, *sound);
+		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
+		{
+			_gameState = ShowingMenu;
+			sound->playPauseSound();
+		}
+	}
 
-				board->rowFull();
-				text->updateText(board->getCompletedRows(), board->getLevel());
-				updateDelay(board->getLevel());
+	time = clock.restart().asSeconds();
+	timer += time;
 
-				window->draw(background);
-				controller->draw(*window);
-				board->draw(*window);
-				text->draw(*window);
-				
-				if(isPaused)
-				{
-					text->paused(*window);
-				}
-				
-				//Display gameOver Text to the screen
-			
-				if (controller->isGameOver())
-				{
-					text->overText(*window);
-					if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
-					{
-						reset();
-					}
-				}
-				window->display();
+	if (timer > delay && !controller->isGameOver() && !isPaused)
+	{
+		timer = 0;
+		controller->movement(sf::Keyboard::Key::Down, board, *sound);
+	}
+
+	board->rowFull(*sound);
+
+	score->getNumberOfRowsCleared(board->getCompletedRows());
+	text->updateText(score->currentScore(), score->currentLevel());
+	updateDelay(score->currentLevel());
+	window->clear();
+	window->draw(background);
+	controller->draw(*window);
+	board->draw(*window);
+	text->draw(*window);
+
+	if (isPaused)
+	{
+		text->paused(*window);
+	}
+
+	//Display gameOver Text to the screen
+
+	
+	window->display();
+	if (controller->isGameOver())
+	{
+		sound->endTheme();
+
+		if (test == 0)
+		{
+			sound->gameOver();
+			test = 1;
+			if (score->isNewHighScore())
+			{
+				std::cout << "WINNER" << std::endl;
+				pu->draw();
+				score->updateLeaderBoard(pu->enteredName());
+			}
+		}
+
+
+		text->overText(*window);
+
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
+		{
+			reset();
+		}
 	}
 }
 //call reset for all classes/variable
 void Game::reset()
 {
+	test = 0;
 	text->reset();
+	score->reset();
 	board->reset();
 	controller->reset();
+	//sound->playTheme();
 	timer = 0;
 	delay = 0.8F;
 }
 //decreases delay of blocks falling according to current level
 void Game::updateDelay(int level)
 {
+	if (level > prevLevel)
+	{
+		//sound is not very good quality and slightly too long
+		sound->levelIncrease();
+		prevLevel = level;
+	}
 	switch (level)
 	{
 	case 1:

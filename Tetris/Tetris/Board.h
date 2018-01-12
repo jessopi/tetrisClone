@@ -3,6 +3,7 @@
 #include "SFML/Window.hpp"
 #include "SFML/Graphics.hpp"
 #include <algorithm>
+#include "gameSound.h"
 /*
 *	Mananges Tetris grid (drawing,deleting rows and adding score)
 *	
@@ -15,8 +16,7 @@ public:
 	Board(std::string );
 	void draw(sf::RenderWindow &);
 	int getCompletedRows();
-	void rowFull();
-	int getLevel();
+	void rowFull(gameSound &sound);
 	void reset();
 private:
 	sf::RectangleShape gblocks;

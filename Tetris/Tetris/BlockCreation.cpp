@@ -17,6 +17,14 @@
 		blockVector.pop_back();
 		return nextBlock;
 	}
+	Tetromino BlockCreation::peek()
+	{
+		if (blockVector.empty())
+			fill();
+
+		auto block = blockVector.back();
+		return block;
+	}
 	//fills blockVector with every Tetromino shape twice and then shuffles.
 	void BlockCreation::fill()
 	{
