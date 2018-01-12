@@ -20,6 +20,7 @@ void Score::readFile(std::string path)
 	}
 	fin.close();
 }
+
 void Score::reset()
 {
 	level = 1;
@@ -27,16 +28,18 @@ void Score::reset()
 	totalRowsCompleted = 0;
 }
 
+//Compares current playerScore to last index of topScore
 bool Score::isNewHighScore()
 {
-	return playerScore > topScores[9].second;
+	return playerScore > topScores.back().second;
 }
+
 void Score::updateLeaderBoard(std::string name)
 {
+	//stores playerScore & player name in pair
 	std::pair<std::string, int> p1;
 	p1.first = name;
 	p1.second = playerScore;
-	//0 ----- 9
 
 	int i = 0;
 	while (p1.second < topScores[i].second)
@@ -44,6 +47,8 @@ void Score::updateLeaderBoard(std::string name)
 		i++;
 	}
 	topScores.insert(topScores.begin() + i, p1);
+	//pops the previous last index of topScores
+	//Max number of items in vector is 10
 	topScores.pop_back();
 }
 std::vector<std::pair<std::string, int>> Score::leaderBoard()
@@ -66,6 +71,8 @@ void Score::getNumberOfRowsCleared(int completedRows)
 	calculateScore(completedRows);
 }
 
+//Switch case to calculate lvl according to total rows completed
+//Increments of 10, subject to change
 void Score::calculateLevel(int completedRows)
 {
 	totalRowsCompleted += completedRows;
@@ -109,6 +116,9 @@ void Score::calculateLevel(int completedRows)
 	else
 		level = 10;
 }
+
+//Calculates points recieved by clearing rows depending on number cleared at one time
+//1 = 50, 2 = 150, 3 = 350 , 4 = 1000
 void Score::calculateScore(int completedRows)
 {
 	int points = 0;
