@@ -3,24 +3,33 @@
 #include <SFML\Graphics.hpp>
 
 /*
-*	handles what shape and color the tetromino block is, along with current orientation
+*	Handles Tetromino block variables (type,color,orientation)
+*	**Consider splitting Tetromino class into smaller classes representing each block
 */
 class Tetromino
 {
 public:
 	Tetromino();
+	//Uses integer between 0-6 to to set the type of tetromino block
 	Tetromino(int i);	
+
+	//Returns Rect representing coordinates for color (Used with blocks.png)
 	sf::IntRect blockColor();
+
+	//Returns matrix representing block shape;
 	std::vector<std::vector<int>> getShape();
 	std::vector<std::vector<int>> clockWiseRotation();
 	std::vector<std::vector<int>> counterClockWiseRotation();
 private:
 	int shapeIndex;
+
+	//controls size of individual tetromino blocks
 	int BlockSize;
 	enum Kind { I, J, L, O, S, T, Z };
 	Kind type;
 	typedef std::vector<std::vector<int>> Shape;
-	//numbers depicting what color the block should be
+	
+	//Contains 2D vectors of all possible orientations of all the tetromino blocks
 	std::map<Kind, std::vector<Shape>> Shapes = {
 		{
 			Kind::I,

@@ -115,7 +115,9 @@ void Game::loop()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Escape))
 		{
 			_gameState = ShowingMenu;
-			sound->playSFX("Rotate");
+			sound->playSFX("Pause");
+			if (controller->isGameOver())
+				reset();
 		}
 	}
 
