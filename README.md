@@ -7,7 +7,8 @@ Controls
   - Up arrow key to rotate block clockwise.
   - Left and Right arrow key to move left and right.
   - Down key to move the block down.
-  - ESC to quit game.
+  - P to pause the game.
+  - ESC to return to mainmenu.
 
 Images
 ------
