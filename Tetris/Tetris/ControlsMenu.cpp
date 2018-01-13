@@ -4,7 +4,7 @@ ControlsMenu::ControlsMenu()
 {
 	theme = tgui::Theme::create("./tguiTheme/blackButton.txt");
 	state = displayControls;
-	auto picture = tgui::Picture::create("./Images/controlsText.png");
+	auto picture = tgui::Picture::create("./Images/menuBackground.png");
 	picture->setSize(1024, 768);
 	picture->setOpacity(.5);
 
@@ -23,7 +23,7 @@ void ControlsMenu::construct_backButton()
 }
 void ControlsMenu::construct_textBox()
 {
-	auto pic = tgui::Picture::create("./Images/menuBackground.png");
+	auto pic = tgui::Picture::create("./Images/controlsText.png");
 	gui.add(pic);
 }
 void ControlsMenu::display(sf::RenderWindow & window, int currentState,gameSound &sound)

@@ -24,7 +24,6 @@ void HighScoreMenu::contruct_backButton()
 }
 void HighScoreMenu::construct_playerNameList()
 {
-	//scoreBox = theme->load("ListBox");
 	playerNameList = tgui::ListBox::create();
 	playerNameList->setSize(200, 450);
 	playerNameList->setPosition(200, 100);
@@ -39,7 +38,6 @@ void HighScoreMenu::construct_playerNameList()
 }
 void HighScoreMenu::construct_playerScoreList()
 {
-	//scoreBox = theme->load("ListBox");
 	playerScoreList = tgui::ListBox::create();
 	playerScoreList->setSize(200, 450);
 	playerScoreList->setPosition(700, 100);
