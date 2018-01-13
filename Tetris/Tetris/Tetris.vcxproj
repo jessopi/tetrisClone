@@ -157,10 +157,10 @@
     <ClCompile Include="Controls.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="gameSound.cpp" />
-    <ClCompile Include="HighScores.cpp" />
+    <ClCompile Include="HighScoreMenu.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="Menu.cpp" />
-    <ClCompile Include="PopUp.cpp" />
+    <ClCompile Include="MainMenu .cpp" />
+    <ClCompile Include="NameEntryWindow.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="Tetromino.cpp" />
     <ClCompile Include="Controller.cpp" />
@@ -172,9 +172,9 @@
     <ClInclude Include="Controls.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="gameSound.h" />
-    <ClInclude Include="HighScores.h" />
-    <ClInclude Include="Menu.h" />
-    <ClInclude Include="PopUp.h" />
+    <ClInclude Include="HighScoreMenu.h" />
+    <ClInclude Include="MainMenu .h" />
+    <ClInclude Include="NameEntryWindow.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="Tetromino.h" />
     <ClInclude Include="Controller.h" />

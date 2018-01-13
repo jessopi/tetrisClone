@@ -5,10 +5,10 @@
 #include "DisplayText.h"
 #include "gameSound.h"
 #include "Controls.h"
-#include "Menu.h"
+#include "MainMenu .h"
 #include "HighScores.h"
 #include "Score.h"
-#include "PopUp.h"
+#include "NameEntryWindow.h"
 //Class the contains the game loop and initializes other class objects
 class Game
 {
@@ -22,11 +22,11 @@ private:
 	Board *board;
 	Controller *controller;
 	gameSound *sound;
-	Menu *m;
+	MainMenu  *m;
 	HighScores *h;
 	Controls *c;
 	Score *score;
-	Popup *pu;
+	NameEntryWindow *pu;
 	sf::RenderWindow *window;
 	sf::Clock clock;
 	sf::Event event;

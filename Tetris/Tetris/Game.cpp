@@ -8,9 +8,9 @@ Game::Game()
 	popUpEntry = true;
 	prevLevel = 1;
 	isPaused = false;
-	pu = new Popup("./Black.txt");
+	pu = new NameEntryWindow("./Black.txt","/Font/courbd.tff");
 	h = new HighScores();
-	m = new Menu();
+	m = new MainMenu();
 	c = new Controls();
 	score = new Score("./leaderBoard.dat");
 	text = new DisplayText("./Font/courbd.ttf");

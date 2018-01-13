@@ -1,6 +1,6 @@
-#include "Menu.h"
+#include "MainMenu .h"
 
-Menu::Menu()
+MainMenu::MainMenu()
 {
 	state = displayMenu;
 	theme = tgui::Theme::create("./Black.txt");
@@ -12,46 +12,44 @@ Menu::Menu()
 	construct_scoreButton();
 	construct_controlButton();
 	construct_exitButton();
-	
-
 }
-void Menu::construct_playButton()
+void MainMenu::construct_playButton()
 {
 	playButton = theme->load("Button");
 	playButton->setSize(200, 50);
 	playButton->setPosition(400, 100);
 	playButton->setText("Play");
-	playButton->connect("pressed", &Menu::changeState, this, displayGame);
+	playButton->connect("pressed", &MainMenu::changeState, this, displayGame);
 	gui.add(playButton);
 }
-void Menu::construct_scoreButton()
+void MainMenu::construct_scoreButton()
 {
 	scoreButton = theme->load("Button");
 	scoreButton->setSize(200, 50);
 	scoreButton->setPosition(400, 200);
 	scoreButton->setText("HighScores");
-	scoreButton->connect("pressed", &Menu::changeState, this, displayScore);
+	scoreButton->connect("pressed", &MainMenu::changeState, this, displayScore);
 	gui.add(scoreButton);
 }
-void Menu::construct_controlButton()
+void MainMenu::construct_controlButton()
 {
 	controlButton = theme->load("Button");
 	controlButton->setSize(200, 50);
 	controlButton->setPosition(400, 300);
 	controlButton->setText("Controls");
-	controlButton->connect("pressed", &Menu::changeState, this, displayControls);
+	controlButton->connect("pressed", &MainMenu::changeState, this, displayControls);
 	gui.add(controlButton);
 }
-void Menu::construct_exitButton()
+void MainMenu::construct_exitButton()
 {
 	exitButton = theme->load("Button");
 	exitButton->setSize(200, 50);
 	exitButton->setPosition(400, 400);
 	exitButton->setText("Exit");
-	exitButton->connect("pressed", &Menu::changeState, this, Exit);
+	exitButton->connect("pressed", &MainMenu::changeState, this, Exit);
 	gui.add(exitButton);
 }
-void Menu::display(sf::RenderWindow &window,int currentState, gameSound &sound)
+void MainMenu::display(sf::RenderWindow &window,int currentState, gameSound &sound)
 {
 	state = (GameState)currentState;
 	gui.setWindow(window);

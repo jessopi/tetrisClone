@@ -1,6 +1,6 @@
-#include "HighScores.h"
-#include <algorithm>
-HighScores::HighScores()
+#include "HighScoreMenu.h"
+
+HighScoreMenu::HighScoreMenu()
 {
 	theme = tgui::Theme::create("./Black.txt");
 	state = displayScore;
@@ -13,17 +13,16 @@ HighScores::HighScores()
 	contruct_backButton();
 
 }
-void HighScores::contruct_backButton()
+void HighScoreMenu::contruct_backButton()
 {
 	backButton = theme->load("Button");
 	backButton->setSize(50, 50);
 	backButton->setPosition(50, 100);
 	backButton->setText("Back");
-	backButton->connect("pressed", &HighScores::changeState, this, displayMenu);
+	backButton->connect("pressed", &HighScoreMenu::changeState, this, displayMenu);
 	gui.add(backButton);
 }
-//temp until db is added
-void HighScores::construct_playerNameList()
+void HighScoreMenu::construct_playerNameList()
 {
 	//scoreBox = theme->load("ListBox");
 	playerNameList = tgui::ListBox::create();
@@ -38,7 +37,7 @@ void HighScores::construct_playerNameList()
 	boxsettings->setHoverBackgroundColor(sf::Color::Black);
 	gui.add(playerNameList);
 }
-void HighScores::construct_playerScoreList()
+void HighScoreMenu::construct_playerScoreList()
 {
 	//scoreBox = theme->load("ListBox");
 	playerScoreList = tgui::ListBox::create();
@@ -53,7 +52,7 @@ void HighScores::construct_playerScoreList()
 	boxsettings->setHoverBackgroundColor(sf::Color::Black);
 	gui.add(playerScoreList);
 }
-void HighScores::getList(std::vector<std::pair<std::string,int>> &list)
+void HighScoreMenu::getList(std::vector<std::pair<std::string,int>> &list)
 {
 	playerNameList->removeAllItems();
 	playerScoreList->removeAllItems();
@@ -63,7 +62,7 @@ void HighScores::getList(std::vector<std::pair<std::string,int>> &list)
 		playerScoreList->addItem(std::to_string(e.second));
 	}
 }
-void HighScores::display(sf::RenderWindow & window,int currentState, gameSound &sound)
+void HighScoreMenu::display(sf::RenderWindow & window,int currentState, gameSound &sound)
 {
 	state = (GameState)currentState;
 	gui.setWindow(window);
