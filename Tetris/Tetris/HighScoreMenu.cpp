@@ -2,9 +2,9 @@
 
 HighScoreMenu::HighScoreMenu()
 {
-	theme = tgui::Theme::create("./Black.txt");
+	theme = tgui::Theme::create("./tguiTheme/blackButton.txt");
 	state = displayScore;
-	auto picture = tgui::Picture::create("./Images/t.png");
+	auto picture = tgui::Picture::create("./Images/menuBackground.png");
 	picture->setSize(1024, 768);
 	picture->setOpacity(.5);
 	construct_playerNameList();

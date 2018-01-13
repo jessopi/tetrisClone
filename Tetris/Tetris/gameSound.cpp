@@ -8,7 +8,7 @@ gameSound::gameSound(std::string themePath, std::string pausePath, std::string r
 	 theme.setLoop(true);
 	 theme.setVolume(1);
 
-	 mainMenuTheme.openFromFile("./Audio/menu.ogg");
+	 mainMenuTheme.openFromFile("./Audio/menuTheme.ogg");
 	 mainMenuTheme.setLoop(true);
 	 mainMenuTheme.setVolume(1);
 

@@ -5,18 +5,18 @@ Game::Game()
 	popUpEntry = true;
 	prevLevel = 1;
 	isPaused = false;
-	nameEntryWindow = new NameEntryWindow("./Black.txt","./Font/courbd.ttf");
+	nameEntryWindow = new NameEntryWindow("./tguiTheme/blackButton.txt","./Font/courbd.ttf");
 	highScoreMenu = new HighScoreMenu();
 	mainMenu = new MainMenu();
 	controlsMenu = new ControlsMenu();
-	score = new Score("./leaderBoard.dat");
+	score = new Score("./Leaderboard/leaderBoard.dat");
 	displayText = new DisplayText("./Font/courbd.ttf");
 	board = new Board("./Images/blocks.png");
 	controller = new Controller("./Images/blocks.png");
-	sound = new gameSound("./Audio/theme.ogg","./Audio/pause.wav","./Audio/block-rotate.wav",
-		"./Audio/gameOver.wav","./Audio/landed.wav","./Audio/lvlup.wav","./Audio/normalClear.wav","./Audio/tetrisClear.wav"
-		,"./Audio/select.wav","./Audio/Win.wav");
-	backgroundTexture.loadFromFile("./Images/Frame1.png");
+	sound = new gameSound("./Audio/gameTheme.ogg","./Audio/pause.wav","./Audio/blockRotation.wav",
+		"./Audio/gameOver.wav","./Audio/collision.wav","./Audio/levelIncrease.wav","./Audio/lineClear.wav","./Audio/tetrisClear.wav"
+		,"./Audio/select.wav","./Audio/newHighScore.wav");
+	backgroundTexture.loadFromFile("./Images/backgroundFrame.png");
 	background.setTexture(backgroundTexture);
 	background.setPosition(280, 0);
 	window = new sf::RenderWindow(sf::VideoMode(1024, 768), "Tetris!", sf::Style::Close | sf::Style::Titlebar);

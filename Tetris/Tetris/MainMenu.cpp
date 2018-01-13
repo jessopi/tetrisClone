@@ -3,8 +3,8 @@
 MainMenu::MainMenu()
 {
 	state = displayMenu;
-	theme = tgui::Theme::create("./Black.txt");
-	auto picture = tgui::Picture::create("./Images/t.png");
+	theme = tgui::Theme::create("./tguiTheme/blackButton.txt");
+	auto picture = tgui::Picture::create("./Images/menuBackground.png");
 	picture->setSize(1024, 768);
 	gui.add(picture);
 

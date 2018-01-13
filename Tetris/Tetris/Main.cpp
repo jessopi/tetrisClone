@@ -2,7 +2,8 @@
 #include <Windows.h>
 int main()
 {
-	//FreeConsole();
+	//windows only
+	FreeConsole();
 	Game game;
 	game.start();
 	return 0;
