@@ -41,10 +41,13 @@ private:
 	//Reads in leaderboard.dat and stores in topScores
 	void readFile(std::string);
 
+	//writes to leaderboard.dat when new highscore is found
+	void writeFile();
+
 	//Calculates Score and Level
 	void calculateScore(int);
 	void calculateLevel(int);
-
+	std::string fpath;
 	//Variables
 	int level;
 	int playerScore;

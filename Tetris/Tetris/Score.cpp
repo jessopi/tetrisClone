@@ -1,9 +1,10 @@
 #include "Score.h"
-
 Score::Score(std::string path)
 {
+	fpath = path;
 	reset();
 	readFile(path);
+
 }
 
 void Score::readFile(std::string path)
@@ -19,6 +20,17 @@ void Score::readFile(std::string path)
 		topScores.push_back(scorePair);
 	}
 	fin.close();
+}
+
+void Score::writeFile()
+{
+	std::ofstream file;
+	file.open(fpath, std::ios::trunc);
+	for (auto &e : topScores)
+	{
+		file << e.first << " " << e.second << std::endl;
+	}
+	file.close();
 }
 
 void Score::reset()
@@ -50,6 +62,8 @@ void Score::updateLeaderBoard(std::string name)
 	//pops the previous last index of topScores
 	//Max number of items in vector is 10
 	topScores.pop_back();
+
+	writeFile();
 }
 std::vector<std::pair<std::string, int>> Score::leaderBoard()
 {
