@@ -67,7 +67,7 @@ void HighScoreMenu::display(sf::RenderWindow & window,int currentState, gameSoun
 	state = (GameState)currentState;
 	gui.setWindow(window);
 	
-	while (state == displayScore)
+	while (state == displayScore && window.isOpen())
 	{
 		while (window.pollEvent(event))
 		{

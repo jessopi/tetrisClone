@@ -53,7 +53,7 @@ void MainMenu::display(sf::RenderWindow &window,int currentState, gameSound &sou
 {
 	state = (GameState)currentState;
 	gui.setWindow(window);
-	while (state == displayMenu)
+	while (state == displayMenu && window.isOpen())
 	{
 		while (window.pollEvent(event))
 		{

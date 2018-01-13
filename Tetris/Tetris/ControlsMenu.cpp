@@ -31,7 +31,7 @@ void ControlsMenu::display(sf::RenderWindow & window, int currentState,gameSound
 	state = (GameState)currentState;
 	gui.setWindow(window);
 
-	while (state == displayControls)
+	while (state == displayControls && window.isOpen())
 	{
 		while (window.pollEvent(event))
 		{
