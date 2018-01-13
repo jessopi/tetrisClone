@@ -11,7 +11,7 @@
 class Board
 {
 public:
-	std::vector<std::vector<int>> Grid; //May need to add accessor for vector
+	std::vector<std::vector<int>> Grid; 
 	Board();
 	Board(std::string );
 	void draw(sf::RenderWindow &);

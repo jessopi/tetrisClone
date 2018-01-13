@@ -1,19 +1,16 @@
 #include "Game.h"
-#include <iostream>
-#include "SFML\Graphics.hpp"]
-#include "TGUI\TGUI.hpp"
 
 Game::Game()
 {
 	popUpEntry = true;
 	prevLevel = 1;
 	isPaused = false;
-	pu = new NameEntryWindow("./Black.txt","/Font/courbd.tff");
-	h = new HighScores();
-	m = new MainMenu();
-	c = new Controls();
+	nameEntryWindow = new NameEntryWindow("./Black.txt","./Font/courbd.ttf");
+	highScoreMenu = new HighScoreMenu();
+	mainMenu = new MainMenu();
+	controlsMenu = new ControlsMenu();
 	score = new Score("./leaderBoard.dat");
-	text = new DisplayText("./Font/courbd.ttf");
+	displayText = new DisplayText("./Font/courbd.ttf");
 	board = new Board("./Images/blocks.png");
 	controller = new Controller("./Images/blocks.png");
 	sound = new gameSound("./Audio/theme.ogg","./Audio/pause.wav","./Audio/block-rotate.wav",
@@ -29,50 +26,55 @@ Game::Game()
 	_gameState = Game::ShowingMenu;
 }
 
+//GameState loop
 void Game::start()
 {
 	while (window->isOpen())
 	{
+		//Checks current _gamestate and chooses according case
 		switch (_gameState)
 		{
+			//Plays mainMenu theme and goes to mainMenu
 			case Game::ShowingMenu:
 			{	
 				sound->playMenuTheme();
 				sound->endTheme();
-				m->display(*window,_gameState,*sound);
-				_gameState = (GameState)m->getState();
+				mainMenu->display(*window,_gameState,*sound);
+				_gameState = (GameState)mainMenu->getState();
 				break;
 			}
+			//Begins go tetris game and plays game music
 			case::Game::Playing:
 			{
 				sound->endMenuTheme();
 				sound->playTheme();
-				loop();
+				gameplayLoop();
 				break;
 			}
+			//Displays controlsMenu
 			case::Game::displayingControls:
 			{
-				c->display(*window, _gameState,*sound);
-				_gameState = (GameState)c->getState();
+				controlsMenu->display(*window, _gameState,*sound);
+				_gameState = (GameState)controlsMenu->getState();
 				break;
 			}
+			//Displays highScoresMenu & gets leaderboards from score
 			case::Game::displayingHighScores:
 			{
-				h->getList(score->leaderBoard());
-				h->display(*window,_gameState,*sound);
-				_gameState = (GameState)h->getState();
+				highScoreMenu->getList(score->leaderBoard());
+				highScoreMenu->display(*window,_gameState,*sound);
+				_gameState = (GameState)highScoreMenu->getState();
 				break;
 			}
+			//Called when game is over & new HS, updates leadbord and writes to file
 			case::Game::GameEnding:
 			{
-				
-				//needs to add bgm for highscore!;
-				//popup needs to take in sound object for confirm button
-				pu->draw();
-				score->updateLeaderBoard(pu->enteredName());
+				nameEntryWindow->draw();
+				score->updateLeaderBoard(nameEntryWindow->enteredName());
 				_gameState = Playing;
 				break;
 			}
+			//Called when exit button is clicked in mainMenu
 			case::Game::Exiting:
 			{
 				window->close();
@@ -82,14 +84,17 @@ void Game::start()
 	}
 }
 
-void Game::loop() 
+void Game::gameplayLoop() 
 {
-	
+	//Polls user for input (Esc,Left,Right,Up,Down,P,Spacebar)
 	while (window->pollEvent(event))
 	{
-		if (event.type == sf::Event::Closed )
+		if (event.type == sf::Event::Closed)
+		{
 			window->close();
-		//pauses game
+		}
+		
+		//Conditionals for keyboard inputs
 		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::P)
 		{
 			isPaused = !isPaused;
@@ -119,33 +124,36 @@ void Game::loop()
 			if (controller->isGameOver())
 				reset();
 		}
+		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && controller->isGameOver())
+		{
+			reset();
+		}
 	}
 
+	//calculates time 
 	time = clock.restart().asSeconds();
 	timer += time;
 
+	//If current time > current delay and game is not over or paused move block down 1 square
 	if (timer > delay && !controller->isGameOver() && !isPaused)
 	{
 		timer = 0;
 		controller->movement(sf::Keyboard::Key::Down, board, *sound);
 	}
+	
+	//calls update & draw functions
+	//To improve efficiency slightly check if gameisOver || paused in gameUpdate
+	//No need to update when under those game conditions.
+	gameUpdate();
+	gameDraw();
 
-	board->rowFull(*sound);
-
-	score->getNumberOfRowsCleared(board->getCompletedRows());
-	text->updateText(score->currentScore(), score->currentLevel());
-	updateDelay(score->currentLevel());
-	window->clear();
-	window->draw(background);
-	controller->draw(*window);
-	board->draw(*window);
-	text->draw(*window);
-
+	//if game is paused display text
 	if (isPaused)
 	{
-		text->paused(*window);
+		displayText->paused(*window);
 	}
 
+	//If gameOver and new highscore display messagebox & overText else just text
 	if (controller->isGameOver())
 	{
 		sound->endTheme();
@@ -157,31 +165,43 @@ void Game::loop()
 			sound->playSFX("HighScore");
 		}
 
-		//fix what overText says
-		//Spacebar to play again, Esc to go to main menu;
-		//when hitting esc game should reset;
-		text->overText(*window);
-
-		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space))
-		{
-			reset();
-		}
+		displayText->overText(*window);
 	}
+	
 	window->display();
-
 }
+
+//draws functions for objects
+void Game::gameDraw()
+{
+	window->clear();
+	window->draw(background);
+	controller->draw(*window);
+	board->draw(*window);
+	displayText->draw(*window);
+}
+
+//update functions for objects
+void Game::gameUpdate()
+{
+	board->rowFull(*sound);
+	score->getNumberOfRowsCleared(board->getCompletedRows());
+	displayText->updateText(score->currentScore(), score->currentLevel());
+	updateDelay(score->currentLevel());
+}
+
 //call reset for all classes/variable
 void Game::reset()
 {
 	popUpEntry = true;
-	text->reset();
+	displayText->reset();
 	score->reset();
 	board->reset();
 	controller->reset();
-	//sound->playTheme();
 	timer = 0;
 	delay = 0.8F;
 }
+
 //decreases delay of blocks falling according to current level
 void Game::updateDelay(int level)
 {

@@ -1,5 +1,5 @@
 #include "Controller.h"
-	Controller::Controller(std::string s) : rTet(), current(),next()
+	Controller::Controller(std::string s) : tetrominoBag(), current(),next()
 	{
 		texture.loadFromFile(s);
 		getNewBlock();
@@ -8,18 +8,18 @@
 	};
 	void Controller::getNewBlock()
 	{
-		current = rTet.nextBlock();
+		current = tetrominoBag.nextBlock();
 		currentPos.x = 3;
 		currentPos.y = 0;
 		currentShape = current.getShape();
 
-		next = rTet.peek();
+		next = tetrominoBag.peek();
 		nextShape = next.getShape();
 	}
 	void Controller::reset()
 	{
 		gameOver = false;
-		rTet.reset();
+		tetrominoBag.reset();
 		getNewBlock();
 	}
 	//draws the current shape to screen
@@ -137,7 +137,6 @@
 						}
 					}
 
-					//get the next block
 					sound.playSFX("Collision");
 					getNewBlock();
 

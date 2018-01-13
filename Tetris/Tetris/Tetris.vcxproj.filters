@@ -36,9 +36,6 @@
     <ClCompile Include="gameSound.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Controls.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="DisplayText.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -48,10 +45,13 @@
     <ClCompile Include="NameEntryWindow.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="MainMenu .cpp">
+    <ClCompile Include="HighScoreMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="HighScoreMenu.cpp">
+    <ClCompile Include="ControlsMenu.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -77,9 +77,6 @@
     <ClInclude Include="Ui.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Controls.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="DisplayText.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -89,10 +86,13 @@
     <ClInclude Include="NameEntryWindow.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="MainMenu .h">
+    <ClInclude Include="HighScoreMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="HighScoreMenu.h">
+    <ClInclude Include="ControlsMenu.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

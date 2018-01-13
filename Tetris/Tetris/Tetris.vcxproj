@@ -154,12 +154,12 @@
   <ItemGroup>
     <ClCompile Include="BlockCreation.cpp" />
     <ClCompile Include="Board.cpp" />
-    <ClCompile Include="Controls.cpp" />
+    <ClCompile Include="ControlsMenu.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="gameSound.cpp" />
     <ClCompile Include="HighScoreMenu.cpp" />
     <ClCompile Include="Main.cpp" />
-    <ClCompile Include="MainMenu .cpp" />
+    <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="NameEntryWindow.cpp" />
     <ClCompile Include="Score.cpp" />
     <ClCompile Include="Tetromino.cpp" />
@@ -169,11 +169,11 @@
   <ItemGroup>
     <ClInclude Include="BlockCreation.h" />
     <ClInclude Include="Board.h" />
-    <ClInclude Include="Controls.h" />
+    <ClInclude Include="ControlsMenu.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="gameSound.h" />
     <ClInclude Include="HighScoreMenu.h" />
-    <ClInclude Include="MainMenu .h" />
+    <ClInclude Include="MainMenu.h" />
     <ClInclude Include="NameEntryWindow.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="Tetromino.h" />
