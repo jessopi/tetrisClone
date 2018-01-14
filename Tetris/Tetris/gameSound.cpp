@@ -6,11 +6,11 @@ gameSound::gameSound(std::string themePath, std::string pausePath, std::string r
 {
 	 theme.openFromFile(themePath);
 	 theme.setLoop(true);
-	 theme.setVolume(1);
+	 theme.setVolume(20);
 
 	 mainMenuTheme.openFromFile("./Audio/menuTheme.ogg");
 	 mainMenuTheme.setLoop(true);
-	 mainMenuTheme.setVolume(1);
+	 mainMenuTheme.setVolume(40);
 
 	 pause.loadFromFile(pausePath);
 	 rotate.loadFromFile(rotatePath);

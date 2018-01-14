@@ -16,8 +16,8 @@ HighScoreMenu::HighScoreMenu()
 void HighScoreMenu::contruct_backButton()
 {
 	backButton = theme->load("Button");
-	backButton->setSize(50, 50);
-	backButton->setPosition(50, 100);
+	backButton->setSize(70, 35);
+	backButton->setPosition(25, 25);
 	backButton->setText("Back");
 	backButton->connect("pressed", &HighScoreMenu::changeState, this, displayMenu);
 	gui.add(backButton);
@@ -26,8 +26,8 @@ void HighScoreMenu::construct_playerNameList()
 {
 	playerNameList = tgui::ListBox::create();
 	playerNameList->setSize(200, 450);
-	playerNameList->setPosition(200, 100);
-	playerNameList->setItemHeight(35);
+	playerNameList->setPosition(250, 100);
+	playerNameList->setItemHeight(38);
 
 	auto boxsettings = playerNameList->getRenderer();
 	boxsettings->setBackgroundColor(sf::Color::Black);
@@ -40,8 +40,8 @@ void HighScoreMenu::construct_playerScoreList()
 {
 	playerScoreList = tgui::ListBox::create();
 	playerScoreList->setSize(200, 450);
-	playerScoreList->setPosition(700, 100);
-	playerScoreList->setItemHeight(35);
+	playerScoreList->setPosition(650, 100);
+	playerScoreList->setItemHeight(38);
 
 	auto boxsettings = playerScoreList->getRenderer();
 	boxsettings->setBackgroundColor(sf::Color::Black);

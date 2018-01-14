@@ -22,7 +22,7 @@ Game::Game()
 	window = new sf::RenderWindow(sf::VideoMode(1024, 768), "Tetris!", sf::Style::Close | sf::Style::Titlebar);
 	timer = 0;
 	time = 0;
-	delay = 0.8F; //in milliseconds
+	delay = 0.65F; //in milliseconds
 	_gameState = Game::ShowingMenu;
 }
 
@@ -199,7 +199,7 @@ void Game::reset()
 	board->reset();
 	controller->reset();
 	timer = 0;
-	delay = 0.8F;
+	delay = 0.65F;
 }
 
 //decreases delay of blocks falling according to current level
@@ -213,34 +213,34 @@ void Game::updateDelay(int level)
 	switch (level)
 	{
 	case 1:
-		delay = .80F;
+		delay = .65;
 		break;
 	case 2:
-		delay = .75F;
-		break;
-	case 3:
-		delay = .70F;
-		break;
-	case 4:
-		delay = .65F;
-		break;
-	case 5:
 		delay = .60F;
 		break;
-	case 6:
+	case 3:
 		delay = .55F;
 		break;
-	case 7:
+	case 4:
 		delay = .50F;
 		break;
-	case 8:
+	case 5:
 		delay = .45F;
 		break;
-	case 9:
+	case 6:
 		delay = .40F;
 		break;
-	case 10:
+	case 7:
 		delay = .35F;
+		break;
+	case 8:
+		delay = .30F;
+		break;
+	case 9:
+		delay = .25F;
+		break;
+	case 10:
+		delay = .20F;
 		break;
 	default:
 		break;

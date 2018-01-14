@@ -19,8 +19,12 @@ private:
 	//constructs the back button to return to the mainMenu
 	void construct_backButton();
 
-	//loads picture for text
-	void construct_textBox();
+	void construct_keyBinds();
+	void construct_keyBindInfo();
 
+
+	//Object pts
 	tgui::Button::Ptr backButton;
+	tgui::ListBox::Ptr keyBinds;
+	tgui::ListBox::Ptr keybindInfo;
 };

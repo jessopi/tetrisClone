@@ -97,7 +97,7 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="leaderBoard.dat">
+    <None Include="Leaderboard\leaderBoard.dat">
       <Filter>Resource Files</Filter>
     </None>
   </ItemGroup>
