@@ -2,6 +2,10 @@ tetrisClone
 ------
 Implementation of the classic tetris game. Implemented using the C++ programming language, SFML and TGUI library.
 
+Libraries
+------
+ - https://github.com/SFML/SFML
+ - https://github.com/texus/TGUI
 
 Features
 ------
