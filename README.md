@@ -27,4 +27,4 @@ Controls
 Images
 ------
 ![](https://i.imgur.com/4WRyy5l.png)
-![](https://i.imgur.com/oshyXUV.png)
+![](https://i.imgur.com/zHnU6QT.png)
