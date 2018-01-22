@@ -19,6 +19,9 @@ public:
 
 	//Outputs the entered name
 	std::string enteredName();
+
+	//destructor
+	~NameEntryWindow();
 private:
 
 	//Function for confirmButton signal

@@ -18,7 +18,7 @@ Game::Game()
 		,"./Audio/select.wav","./Audio/newHighScore.wav");
 	backgroundTexture.loadFromFile("./Images/backgroundFrame.png");
 	background.setTexture(backgroundTexture);
-	background.setPosition(280, 0);
+	background.setPosition(102, 0);
 	window = new sf::RenderWindow(sf::VideoMode(1024, 768), "Tetris!", sf::Style::Close | sf::Style::Titlebar);
 	timer = 0;
 	time = 0;
@@ -103,6 +103,10 @@ void Game::gameplayLoop()
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right) && !isPaused)
 		{
 			controller->movement(sf::Keyboard::Key::Right, board, *sound);
+		}
+		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Return && !isPaused)
+		{
+			controller->swapTetromino();
 		}
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left) && !isPaused)
 		{
@@ -245,4 +249,18 @@ void Game::updateDelay(int level)
 	default:
 		break;
 	}
+}
+
+Game::~Game()
+{
+	delete displayText;
+	delete board;
+	delete controller;
+	delete sound;
+	delete mainMenu;
+	delete highScoreMenu;
+	delete controlsMenu;
+	delete score;
+	delete nameEntryWindow;
+	delete window;
 }

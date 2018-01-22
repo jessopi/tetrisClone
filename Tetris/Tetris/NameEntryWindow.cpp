@@ -83,3 +83,8 @@ void NameEntryWindow::draw()
 		window->display();
 	}
 }
+
+NameEntryWindow::~NameEntryWindow()
+{
+	delete window;
+}

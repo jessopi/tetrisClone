@@ -85,5 +85,7 @@ public:
 	Game();
 
 	//begins the initial game loop
-	void start();	
+	void start();
+
+	~Game();
 };

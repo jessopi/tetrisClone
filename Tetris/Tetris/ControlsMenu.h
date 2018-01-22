@@ -24,6 +24,7 @@ private:
 
 
 	//Object pts
+	//smart pointers
 	tgui::Button::Ptr backButton;
 	tgui::ListBox::Ptr keyBinds;
 	tgui::ListBox::Ptr keybindInfo;

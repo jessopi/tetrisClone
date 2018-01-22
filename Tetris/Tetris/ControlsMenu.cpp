@@ -39,6 +39,7 @@ void ControlsMenu::construct_keyBinds()
 	keyBinds->addItem("Left Arrow");
 	keyBinds->addItem("Right Arrow");
 	keyBinds->addItem("Down Arrow");
+	keyBinds->addItem("Return");
 	keyBinds->addItem("Esc");
 	keyBinds->addItem("P");
 	gui.add(keyBinds);
@@ -60,6 +61,7 @@ void ControlsMenu::construct_keyBindInfo()
 	keybindInfo->addItem("Move Left");
 	keybindInfo->addItem("Move Right");
 	keybindInfo->addItem("Move Down");
+	keybindInfo->addItem("Hold Block");
 	keybindInfo->addItem("Return to Menu");
 	keybindInfo->addItem("Pause");
 

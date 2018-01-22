@@ -1,9 +1,12 @@
 #include "Controller.h"
+#include <iostream>
 	Controller::Controller(std::string s) : tetrominoBag(), current(),next()
 	{
 		texture.loadFromFile(s);
 		getNewBlock();
 		gameOver = false;
+		holdIsEmpty = true;
+		hasBeenSwapped = false;
 		
 	};
 	void Controller::getNewBlock()
@@ -12,13 +15,15 @@
 		currentPos.x = 3;
 		currentPos.y = 0;
 		currentShape = current.getShape();
-
+	
 		next = tetrominoBag.peek();
 		nextShape = next.getShape();
 	}
 	void Controller::reset()
 	{
 		gameOver = false;
+		holdIsEmpty = true;
+		hasBeenSwapped = false;
 		tetrominoBag.reset();
 		getNewBlock();
 	}
@@ -38,6 +43,7 @@
 		}
 
 		drawNext(window);
+		drawHold(window);
 	}
 	
 	void Controller::drawNext(sf::RenderWindow &window)
@@ -138,6 +144,7 @@
 					}
 
 					sound.playSFX("Collision");
+					hasBeenSwapped = false;
 					getNewBlock();
 
 					//if collision is still occuring after moveback then the game is over
@@ -214,4 +221,68 @@
 		}
 
 		return true;
+	}
+
+	void Controller::drawHold(sf::RenderWindow &window)
+	{
+		if (!holdIsEmpty)
+		{
+			for (unsigned i = 0; i < holdShape.size(); ++i) {
+				for (unsigned j = 0; j < holdShape[0].size(); ++j) {
+					if (holdShape[i][j]) {
+						sf::RectangleShape Block(sf::Vector2f(BlockSize, BlockSize));
+						Block.setTexture(&texture);
+
+						Block.setTextureRect(hold.blockColor());
+						//aligning shapes with background
+						if (holdShape[i][j] == 1)//I tetromino
+						{
+							Block.setPosition(167 + (j * BlockSize), i * BlockSize + 115);
+						}
+						else if (holdShape[i][j] == 4)//O tetromino
+						{
+							Block.setPosition(165 + (j * BlockSize), i * BlockSize + 100);
+						}
+						else
+							Block.setPosition(180 + (j * BlockSize), i * BlockSize + 102);
+
+						window.draw(Block);
+					}
+				}
+			}
+		}
+	}
+
+	void Controller::swapTetromino()
+	{
+		if (holdIsEmpty)
+		{	
+			//call getShape instead of using currentShape because you need base position
+			hold = current;
+			holdShape = current.getShape();
+
+			//grabs new current and next tetromino
+			getNewBlock();
+
+			holdIsEmpty = false;
+		}
+		else
+		{
+			//allows only once swap per bottom collision
+			if (!hasBeenSwapped)
+			{
+				//temp object for swapping current and hold piece
+				auto tempObject = hold;
+				hold = current;
+				current = tempObject;
+
+				holdShape = hold.getShape();
+				currentShape = current.getShape();
+				hasBeenSwapped = true;
+
+				//resets x & y to start at top
+				currentPos.x = 3;
+				currentPos.y = 0;
+			}
+		}
 	}

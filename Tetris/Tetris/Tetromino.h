@@ -16,8 +16,10 @@ public:
 	//Returns Rect representing coordinates for color (Used with blocks.png)
 	sf::IntRect blockColor();
 
-	//Returns matrix representing block shape;
+	//Returns matrix representing original block shape;
 	std::vector<std::vector<int>> getShape();
+
+	//Returns rotated 90 degree block shape
 	std::vector<std::vector<int>> clockWiseRotation();
 	std::vector<std::vector<int>> counterClockWiseRotation();
 private:

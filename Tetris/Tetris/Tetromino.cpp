@@ -18,7 +18,7 @@
 	
 	std::vector<std::vector<int>> Tetromino::getShape()
 	{
-		return Shapes[type][shapeIndex];
+		return Shapes[type][0];
 	}
 	
 	std::vector<std::vector<int>> Tetromino::clockWiseRotation()

@@ -15,7 +15,7 @@
 int main()
 {
 	//windows only
-	FreeConsole();
+	//FreeConsole();
 	Game game;
 	game.start();
 	return 0;
