@@ -1,6 +1,18 @@
 tetrisClone
 ------
-Implementation of the classic tetris game. Implemented using the C++ programming language and the SFML library.
+Implementation of the classic tetris game. Implemented using the C++ programming language, SFML and TGUI library.
+
+Libraries
+------
+ - https://github.com/SFML/SFML
+ - https://github.com/texus/TGUI
+
+Features
+------
+  - Leaderboard
+  - Increasing difficulty(10 levels)
+  - Background Music and Sound effects
+  - Next piece display
 
 Controls
 ------
@@ -12,4 +24,5 @@ Controls
 
 Images
 ------
-- Coming soon
+![](https://i.imgur.com/4WRyy5l.png)
+![](https://i.imgur.com/63mBJW2.png)
