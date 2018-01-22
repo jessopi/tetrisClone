@@ -9,16 +9,18 @@ Libraries
 
 Features
 ------
-  - Leaderboard
-  - Increasing difficulty(10 levels)
-  - Background Music and Sound effects
-  - Next piece display
+  - Leaderboard.
+  - Increasing difficulty(10 levels).
+  - Background Music and Sound effects.
+  - Next piece display.
+  - Ability to hold a tetromino piece.
 
 Controls
 ------
   - Up arrow key to rotate block clockwise.
   - Left and Right arrow key to move left and right.
   - Down key to move the block down.
+  - Press return key to swap with block in hold.
   - P to pause the game.
   - ESC to return to mainmenu.
 
