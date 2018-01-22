@@ -18,5 +18,6 @@ int main()
 	FreeConsole();
 	Game game;
 	game.start();
+
 	return 0;
 }
